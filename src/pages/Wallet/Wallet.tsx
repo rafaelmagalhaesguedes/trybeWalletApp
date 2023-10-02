@@ -3,10 +3,12 @@ import WalletForm from '../../components/WalletForm';
 
 function Wallet() {
   return (
-    <>
+    <div className="container">
       <Header />
-      <WalletForm />
-    </>
+      <main>
+        <WalletForm />
+      </main>
+    </div>
   );
 }
 
