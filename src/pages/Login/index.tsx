@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-type LoginFormType = {
-  email: string,
-  password: string,
-};
+import { LoginDataType } from '../../types';
 
 function Login() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<LoginFormType>({
+  const [formData, setFormData] = useState<LoginDataType>({
     email: '',
     password: '',
   });
