@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginDataType } from '../../types';
+import { useDispatch } from 'react-redux';
+import { saveUserEmail } from '../../redux/actions';
+import { Dispatch, LoginDataType } from '../../types';
 
 function Login() {
+  const dispatch: Dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginDataType>({
     email: '',
@@ -28,7 +31,10 @@ function Login() {
   };
 
   const handleSubmit = () => {
-    if (formValid) navigate('/carteira');
+    if (formValid) {
+      dispatch(saveUserEmail(formData.email));
+      navigate('/carteira');
+    }
   };
 
   return (
