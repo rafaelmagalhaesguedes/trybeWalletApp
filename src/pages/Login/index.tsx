@@ -1,21 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { saveUserEmail } from '../../redux/actions';
-import { Dispatch } from '../../types';
+import { addUserEmail } from '../../redux/actions';
+import { LoginType } from '../../types';
 
 function Login() {
-  const dispatch: Dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formValid, setFormValid] = useState<boolean>(false);
+  const [formData, setFormData] = useState<LoginType>({
     email: '',
     password: '',
   });
-  const [formValid, setFormValid] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.email) {
+      dispatch(addUserEmail(formData.email));
+      navigate('/carteira');
+    }
   };
 
   useEffect(() => {
@@ -27,16 +35,11 @@ function Login() {
     }
   }, [formData.email, formData.password]);
 
-  const handleSubmit = () => {
-    dispatch(saveUserEmail(formData.email));
-    navigate('/carteira');
-  };
-
   return (
     <section className="login-container">
       <div className="login-wrapper">
         <div className="login-logo">Logo</div>
-        <form className="login-form">
+        <form onSubmit={ handleSubmit }>
           <input
             data-testid="email-input"
             type="text"
@@ -54,7 +57,6 @@ function Login() {
           <button
             type="submit"
             disabled={ formValid }
-            onClick={ handleSubmit }
           >
             Entrar
           </button>

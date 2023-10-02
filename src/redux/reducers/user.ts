@@ -1,14 +1,13 @@
-import { AnyAction } from 'redux';
-import { SAVE_EMAIL } from '../actions';
-import { UserEmailType } from '../../types';
+import { ADD_EMAIL } from '../actions';
+import { ActionType } from '../../types';
 
-const INITIAL_STATE: UserEmailType = {
+const INITIAL_STATE = {
   email: '',
 };
 
-function userReducer(state = INITIAL_STATE, action: AnyAction) {
+const userReducer = (state = INITIAL_STATE, action: ActionType) => {
   switch (action.type) {
-    case SAVE_EMAIL:
+    case ADD_EMAIL:
       return {
         ...state,
         email: action.payload,
@@ -16,6 +15,6 @@ function userReducer(state = INITIAL_STATE, action: AnyAction) {
     default:
       return state;
   }
-}
+};
 
 export default userReducer;
