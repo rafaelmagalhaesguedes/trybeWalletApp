@@ -1,11 +1,12 @@
 import { AnyAction } from 'redux';
 import { SAVE_EMAIL } from '../actions';
+import { UserEmailType } from '../../types';
 
-const initialState = {
+const INITIAL_STATE: UserEmailType = {
   email: '',
 };
 
-function searchReducer(state = initialState, action: AnyAction) {
+function userReducer(state = INITIAL_STATE, action: AnyAction) {
   switch (action.type) {
     case SAVE_EMAIL:
       return {
@@ -17,4 +18,4 @@ function searchReducer(state = initialState, action: AnyAction) {
   }
 }
 
-export default searchReducer;
+export default userReducer;

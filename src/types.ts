@@ -1,17 +1,12 @@
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-export type LoginDataType = {
+export type UserEmailType = {
   email: string,
-  password: string,
 };
 
-export type InitialStateLogin = {
-  email: string;
+export type RootState = {
+  user: UserEmailType;
 };
 
-export type GlobalStateType = {
-  userReducer: InitialStateLogin;
-};
-
-export type Dispatch = ThunkDispatch<GlobalStateType, null, AnyAction>;
+export type Dispatch = ThunkDispatch<RootState, null, AnyAction>;

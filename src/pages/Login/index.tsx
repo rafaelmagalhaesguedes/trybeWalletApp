@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { saveUserEmail } from '../../redux/actions';
-import { Dispatch, LoginDataType } from '../../types';
+import { Dispatch } from '../../types';
 
 function Login() {
   const dispatch: Dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<LoginDataType>({
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
@@ -16,25 +16,20 @@ function Login() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    const isEmailValid = validateEmail(formData.email);
-    const isPasswordValid = validatePassword();
-    setFormValid(isEmailValid && isPasswordValid);
   };
 
-  const validatePassword = () => {
-    return formData.password.length >= 6;
-  };
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
+  useEffect(() => {
+    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    if (formData.password.length >= 6 && emailRegex.test(formData.email)) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [formData.email, formData.password]);
 
   const handleSubmit = () => {
-    if (formValid) {
-      dispatch(saveUserEmail(formData.email));
-      navigate('/carteira');
-    }
+    dispatch(saveUserEmail(formData.email));
+    navigate('/carteira');
   };
 
   return (
@@ -58,7 +53,7 @@ function Login() {
           />
           <button
             type="submit"
-            disabled={ !formValid }
+            disabled={ formValid }
             onClick={ handleSubmit }
           >
             Entrar
