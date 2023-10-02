@@ -1,15 +1,16 @@
 import { AnyAction } from 'redux';
+import { SAVE_EMAIL } from '../actions';
 
 const initialState = {
   email: '',
-  password: '',
 };
 
 function searchReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
-    case 'LOGIN_BEGIN':
+    case SAVE_EMAIL:
       return {
         ...state,
+        email: action.payload,
       };
     default:
       return state;
