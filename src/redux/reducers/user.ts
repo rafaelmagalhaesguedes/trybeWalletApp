@@ -1,11 +1,11 @@
 import { ADD_EMAIL } from '../actions';
-import { ActionType } from '../../types';
+import { ActionType, LoginType } from '../../types';
 
 const INITIAL_STATE = {
   email: '',
 };
 
-const userReducer = (state = INITIAL_STATE, action: ActionType) => {
+const userReducer = (state: LoginType = INITIAL_STATE, action: ActionType) => {
   switch (action.type) {
     case ADD_EMAIL:
       return {
