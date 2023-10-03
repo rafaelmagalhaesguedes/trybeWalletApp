@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addUserEmail } from '../../redux/actions';
-import { LoginType } from '../../types';
+import { actionAddEmail } from '../../redux/actions';
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formValid, setFormValid] = useState<boolean>(false);
-  const [formData, setFormData] = useState<LoginType>({
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
@@ -20,10 +19,8 @@ function Login() {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.email) {
-      dispatch(addUserEmail(formData.email));
-      navigate('/carteira');
-    }
+    dispatch(actionAddEmail(formData.email));
+    navigate('/carteira');
   };
 
   useEffect(() => {
