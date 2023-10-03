@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Expenses } from '../types';
+import { useDispatch } from 'react-redux';
+import { fetchCurrencies } from '../services/api';
 
 function WalletForm() {
+  const dispatch = useDispatch();
   const [nextId, setNextId] = useState(0);
   const [formData, setFormData] = useState({
     id: 0,
@@ -18,34 +20,30 @@ function WalletForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //
+
+    const rate = await fetchCurrencies();
+
     // Crie um objeto de despesa
-    const { description, tag, value, method, currency } = formData;
-    //
-    const expense: Expenses = {
-      id: Date.now(), // ID sequencial
-      value,
-      description,
-      currency,
-      method,
-      tag,
+    const expense = {
+      ...formData,
+      exchangeRates: rate,
     };
 
     // Dispatch da ação para adicionar a despesa ao estado global
-    dispatch(addExpense(expense));
+    dispatch(actionAddExpense(expense));
 
     setNextId(nextId + 1);
 
     // Limpe os campos do formulário
     setFormData({
-      id: nextId,
+      id: expense.id + 1,
       description: '',
-      tag: '',
+      tag: 'Alimentação',
       value: '',
-      method: '',
-      currency: '', // Defina um valor padrão para a moeda, se necessário
+      method: 'DINHEIRO',
+      currency: 'BRL', // Defina um valor padrão para a moeda, se necessário
     });
   };
 
