@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchCurrencies } from '../services/api';
+import { actionAddExpense } from '../redux/actions';
 
 function WalletForm() {
   const dispatch = useDispatch();
-  const [nextId, setNextId] = useState(0);
+  const [nextId, setNextId] = useState(0);imp
   const [formData, setFormData] = useState({
     id: 0,
     description: '',
