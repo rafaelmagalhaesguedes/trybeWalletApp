@@ -3,6 +3,15 @@ export type LoginType = {
   password: string,
 };
 
+export type Expenses = {
+  id: number,
+  value: string,
+  currency: string,
+  method: string,
+  description: string,
+  tag: string,
+};
+
 export type ActionType = {
   type: string;
   payload: string;
@@ -13,3 +22,16 @@ export type RootState = {
     email: string;
   },
 };
+
+/*
+export type Expenses = {
+  id: number;
+  value: string;
+  currency: string,
+  method: string;
+  description: string;
+  tag: string;
+  exchangeRates: any;
+};
+
+*/
