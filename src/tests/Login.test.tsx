@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
-describe('Testes Login', () => {
+describe('Testes Login Page', () => {
   beforeEach(() => {
     renderWithRouterAndRedux(<App />);
   });
