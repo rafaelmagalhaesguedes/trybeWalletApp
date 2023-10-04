@@ -12,11 +12,11 @@ export type ExpensesType = {
   currency: string,
   method: string,
   tag: string,
-  exchangeRates: string,
+  exchangeRates: string | any,
 };
 
 export type WalletType = {
-  expenses: [],
+  expenses: ExpensesType[],
   currencies: [],
 };
 
