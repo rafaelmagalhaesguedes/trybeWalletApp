@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { FormType, TypeDispatch } from '../types';
-import { actionCreatorExpenses, actionCreatorGetApi } from '../redux/actions';
+import { ExpensesType, RootStateType, DispatchType } from '../types';
+import { actionAddExpenses, actionFetchApi } from '../redux/actions';
 import { fetchCurrencies } from '../services/api';
 
 function WalletForm() {
-  const dispatch: TypeDispatch = useDispatch();
-  const getCurrencies = useSelector((state: any) => state.wallet.currencies);
-  const [formData, setFormData] = useState<FormType>({
+  const dispatch: DispatchType = useDispatch();
+  const { currencies } = useSelector((state: RootStateType) => state.wallet);
+  const [formData, setFormData] = useState<ExpensesType>({
     id: 0,
     value: '',
     description: '',
@@ -31,7 +31,7 @@ function WalletForm() {
     // Salva Dados no estado global junto com a Cotação da moeda
     const Expense = { ...formData, exchangeRates: rate };
     // Dispara action para salvar os dados
-    dispatch(actionCreatorExpenses(Expense));
+    dispatch(actionAddExpenses(Expense));
     // Reseta o formulário
     setFormData({
       id: Expense.id + 1,
@@ -45,7 +45,7 @@ function WalletForm() {
   };
   // Busca moedas da API
   useEffect(() => {
-    dispatch(actionCreatorGetApi());
+    dispatch(actionFetchApi());
   }, [dispatch]);
 
   return (
@@ -82,7 +82,7 @@ function WalletForm() {
             onChange={ handleChange }
           >
             {
-            getCurrencies.map((coin: any) => {
+            currencies.map((coin) => {
               return (
                 <option key={ coin }>
                   {coin}
