@@ -1,24 +1,33 @@
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+
 export type LoginType = {
   email: string,
 };
 
-export type Expenses = {
+export type ExpensesType = {
   id: number,
   value: string,
+  description: string,
   currency: string,
   method: string,
-  description: string,
   tag: string,
-  exchangeRate: string,
+  exchangeRates: string,
+};
+
+export type WalletType = {
+  expenses: [],
+  currencies: [],
 };
 
 export type ActionType = {
-  type: string;
-  payload: string;
+  type: string,
+  payload: LoginType,
 };
 
-export type RootState = {
-  user: {
-    email: string;
-  },
+export type RootStateType = {
+  user: LoginType,
+  wallet: WalletType,
 };
+
+export type DispatchType = ThunkDispatch<RootStateType, null, AnyAction>;
