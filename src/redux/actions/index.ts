@@ -1,16 +1,33 @@
+import { fetchCurrencies } from '../../services/api';
+import { DispatchType, ExpensesType, LoginType } from '../../types';
+
 export const ADD_EMAIL = 'ADD_EMAIL';
-export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 
-export const actionAddEmail = (email: string) => (
-  {
-    type: ADD_EMAIL,
-    payload: email,
-  }
-);
+export const actionaAddUser = (user: LoginType) => ({
+  type: ADD_EMAIL,
+  payload: user,
+});
 
-export const actionAddExpense = (data: string[]) => (
-  {
-    type: ADD_EXPENSE,
-    payload: data,
-  }
-);
+export const actionAddExpenses = (expenses: ExpensesType) => ({
+  type: ADD_EXPENSES,
+  payload: expenses,
+});
+
+export const actionAddCurrencies = (currencies: string[]) => ({
+  type: ADD_CURRENCIES,
+  payload: currencies,
+});
+
+export function actionFetchApi() {
+  return async (dispatch: DispatchType) => {
+    try {
+      const data = await fetchCurrencies();
+      const currencies = Object.keys(data).filter((currencie) => currencie !== 'USDT');
+      dispatch(actionAddCurrencies(currencies));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
