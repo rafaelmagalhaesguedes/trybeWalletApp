@@ -1,11 +1,11 @@
 import { fetchCurrencies } from '../../services/api';
-import { DispatchType, ExpensesType, LoginType } from '../../types';
+import { DispatchType, ExpensesType } from '../../types';
 
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 
-export const actionaAddUser = (user: LoginType) => ({
+export const actionAddUser = (user: string) => ({
   type: ADD_EMAIL,
   payload: user,
 });
