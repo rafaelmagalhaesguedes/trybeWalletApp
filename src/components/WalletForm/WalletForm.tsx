@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { ExpensesType, RootStateType, DispatchType } from '../../types';
+import { RootStateType, DispatchType } from '../../types';
 import { actionAddExpenses, actionFetchApi } from '../../redux/actions';
 import { fetchCurrencies } from '../../services/api';
 
 function WalletForm() {
   const dispatch: DispatchType = useDispatch();
   const { currencies } = useSelector((state: RootStateType) => state.wallet);
-  const [formData, setFormData] = useState<ExpensesType>({
+  const [formData, setFormData] = useState({
     id: 0,
     value: '',
     description: '',
     currency: 'USD',
     method: 'Dinheiro',
     tag: 'Alimentação',
-    exchangeRates: '',
   });
 
   const handleChange = (
@@ -40,7 +39,6 @@ function WalletForm() {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      exchangeRates: '',
     });
   };
   // Busca moedas da API
