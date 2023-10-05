@@ -6,6 +6,7 @@ function Table() {
   const dispatch: DispatchType = useDispatch();
   const { expenses } = useSelector((state: RootStateType) => state.wallet);
 
+  // Delete Expense
   const handleDeleteExpense = (id: number) => {
     dispatch(actionDeleteExpenses(id));
   };
