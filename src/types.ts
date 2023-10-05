@@ -9,7 +9,7 @@ export type ExpensesType = {
   id: number,
   value: string,
   description: string,
-  currency: string;
+  currency: string,
   method: string,
   tag: string,
   exchangeRates: {
@@ -28,7 +28,7 @@ export type WalletType = {
 
 export type ActionType = {
   type: string,
-  payload: LoginType,
+  payload: string | number,
 };
 
 export type RootStateType = {
