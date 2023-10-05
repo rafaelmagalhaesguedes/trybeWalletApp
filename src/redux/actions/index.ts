@@ -3,6 +3,7 @@ import { DispatchType, ExpensesType } from '../../types';
 
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const DELETE_EXPENSES = 'DELETE_EXPENSES';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 
 export const actionAddUser = (user: string) => ({
@@ -13,6 +14,11 @@ export const actionAddUser = (user: string) => ({
 export const actionAddExpenses = (expenses: ExpensesType) => ({
   type: ADD_EXPENSES,
   payload: expenses,
+});
+
+export const actionDeleteExpenses = (id: number) => ({
+  type: DELETE_EXPENSES,
+  payload: id,
 });
 
 export const actionAddCurrencies = (currencies: string[]) => ({
