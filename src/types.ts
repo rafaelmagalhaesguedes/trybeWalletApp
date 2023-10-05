@@ -9,10 +9,16 @@ export type ExpensesType = {
   id: number,
   value: string,
   description: string,
-  currency: string,
+  currency: string;
   method: string,
   tag: string,
-  exchangeRates: string | any,
+  exchangeRates: {
+    [currency: string]: {
+      code: string,
+      name: string,
+      ask: string,
+    }
+  },
 };
 
 export type WalletType = {
