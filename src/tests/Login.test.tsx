@@ -4,14 +4,17 @@ import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
 describe('Testes Login Page', () => {
+  const EMAIL = 'email-input';
+  const PASS = 'password-input';
+
   beforeEach(() => {
     renderWithRouterAndRedux(<App />);
   });
 
   it('1. Verifica se o formulário e botão são reenderizados na tela: ', () => {
     // Encontra os elementos na tela
-    const emailInput = screen.getByTestId('email-input');
-    const passwordInput = screen.getByTestId('password-input');
+    const emailInput = screen.getByTestId(EMAIL);
+    const passwordInput = screen.getByTestId(PASS);
     const button = screen.getByRole('button');
 
     // Executa as asserções
@@ -21,29 +24,47 @@ describe('Testes Login Page', () => {
   });
 
   it('2. Verifica se o botão está desabilitado inicialmente: ', () => {
-    // Encontra o botão na tela
     const button = screen.getByRole('button');
 
-    // Verifica se está desabilitado
     expect(button).toBeDisabled();
   });
 
   it('3. Verifica se o formulário funciona corretamente: ', async () => {
-    // Configura a instância do userEvent
     const user = userEvent.setup();
 
-    // Encontra os elementos de entrada de email, senha e o botão
-    const emailInput = screen.getByTestId('email-input');
-    const passwordInput = screen.getByTestId('password-input');
+    const emailInput = screen.getByTestId(EMAIL);
+    const passwordInput = screen.getByTestId(PASS);
     const button = screen.getByRole('button');
 
-    // Preenche os campos de email e senha e clica no botão
     await user.type(emailInput, 'trybe@trybe.com');
     await user.type(passwordInput, '123123');
     await user.click(button);
 
-    // Encontra um elemento após a ação e execute uma asserção
+    const emailField = screen.getByTestId('email-field');
+    const totalField = screen.getByTestId('total-field');
     const currencyField = screen.getByTestId('header-currency-field');
+    expect(emailField).toBeInTheDocument();
+    expect(totalField).toBeInTheDocument();
     expect(currencyField).toBeInTheDocument();
+  });
+
+  test('4. Verifica se ao acessar diretamente a rota /carteira, o formulário não é renderizado: ', () => {
+    const route = { initialEntries: ['/carteira'] };
+    renderWithRouterAndRedux(<App />, route);
+    expect(screen.queryByText('Value: ')).not.toBeInTheDocument();
+    expect(screen.queryByText('Description: ')).not.toBeInTheDocument();
+  });
+
+  it('5. Verifica se o botão de login é enabled após preencher campos de email e senha corretamente: ', async () => {
+    const emailInput = screen.getByTestId(EMAIL);
+    const passwordInput = screen.getByTestId(PASS);
+    const button = screen.getByRole('button');
+
+    expect(button).toBeDisabled();
+
+    await userEvent.type(emailInput, 'rafael@rafael.com');
+    await userEvent.type(passwordInput, '123123');
+
+    expect(button).not.toBeDisabled();
   });
 });
