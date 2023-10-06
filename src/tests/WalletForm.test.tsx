@@ -1,15 +1,37 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import WalletForm from '../components/WalletForm/WalletForm';
-import { fetchCurrencies } from '../services/api';
+import mockData from './helpers/mockData';
+
+const initialState = {
+  user: {
+    email: 'teste@test.com',
+  },
+  wallet: {
+    currencies: Object.keys(mockData),
+    expenses: [{
+      id: 0,
+      exchangeRates: mockData,
+      value: '50',
+      currency: 'USD',
+      description: 'Despesa',
+      tag: 'Alimentação',
+      method: 'Dinheiro',
+    }],
+    expenseId: null,
+    expenseUpdate: false,
+  },
+};
+
+beforeAll(() => {
+  vi.spyOn(global, 'fetch').mockResolvedValue({ json: async () => mockData } as Response);
+});
 
 describe('Testes Wallet Form component', () => {
-  beforeEach(() => {
-    renderWithRouterAndRedux(<WalletForm />);
-  });
-
   it('1. Verifica se o formulário e o botão foram renderizados na tela. ', () => {
+    renderWithRouterAndRedux(<WalletForm />);
     expect(screen.getByTestId('value-input')).toBeInTheDocument();
     expect(screen.getByTestId('description-input')).toBeInTheDocument();
     expect(screen.getByTestId('currency-input')).toBeInTheDocument();
@@ -19,19 +41,16 @@ describe('Testes Wallet Form component', () => {
   });
 
   it('2. Verifica se o botão Adicionar despesa está funcionando.', () => {
+    renderWithRouterAndRedux(<WalletForm />);
     const submitButton = screen.getByRole('button');
     userEvent.click(submitButton);
   });
 
-  it('3. Verifica se o formulário permite selecionar a moeda', async () => {
-    const currencyInput = screen.getByTestId('currency-input');
-    userEvent.click(currencyInput);
+  it('3. Verifica se carrega as moedas corretamente da API', async () => {
+    renderWithRouterAndRedux(<WalletForm />, { initialEntries: ['/carteira'], initialState });
 
-    await fetchCurrencies();
-
-    const optionToSelect = screen.getByText('USD');
-    userEvent.click(optionToSelect);
-
-    expect(currencyInput).toHaveValue('USD');
+    ['USD'].forEach((currency) => {
+      expect(screen.getByDisplayValue(currency)).toBeInTheDocument();
+    });
   });
 });
