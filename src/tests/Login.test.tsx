@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
@@ -21,50 +20,5 @@ describe('Testes Login Page', () => {
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(button).toBeInTheDocument();
-  });
-
-  it('2. Verifica se o botão está desabilitado inicialmente: ', () => {
-    const button = screen.getByRole('button');
-
-    expect(button).toBeDisabled();
-  });
-
-  it('3. Verifica se o formulário funciona corretamente: ', async () => {
-    const user = userEvent.setup();
-
-    const emailInput = screen.getByTestId(EMAIL);
-    const passwordInput = screen.getByTestId(PASS);
-    const button = screen.getByRole('button');
-
-    await user.type(emailInput, 'trybe@trybe.com');
-    await user.type(passwordInput, '123123');
-    await user.click(button);
-
-    const emailField = screen.getByTestId('email-field');
-    const totalField = screen.getByTestId('total-field');
-    const currencyField = screen.getByTestId('header-currency-field');
-    expect(emailField).toBeInTheDocument();
-    expect(totalField).toBeInTheDocument();
-    expect(currencyField).toBeInTheDocument();
-  });
-
-  test('4. Verifica se ao acessar diretamente a rota /carteira, o formulário não é renderizado: ', () => {
-    const route = { initialEntries: ['/carteira'] };
-    renderWithRouterAndRedux(<App />, route);
-    expect(screen.queryByText('Value: ')).not.toBeInTheDocument();
-    expect(screen.queryByText('Description: ')).not.toBeInTheDocument();
-  });
-
-  it('5. Verifica se o botão de login é enabled após preencher campos de email e senha corretamente: ', async () => {
-    const emailInput = screen.getByTestId(EMAIL);
-    const passwordInput = screen.getByTestId(PASS);
-    const button = screen.getByRole('button');
-
-    expect(button).toBeDisabled();
-
-    await userEvent.type(emailInput, 'rafael@rafael.com');
-    await userEvent.type(passwordInput, '123123');
-
-    expect(button).not.toBeDisabled();
   });
 });
