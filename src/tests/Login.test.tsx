@@ -53,4 +53,17 @@ describe('Testes Login Page', () => {
     expect(screen.queryByText('Value: ')).not.toBeInTheDocument();
     expect(screen.queryByText('Description: ')).not.toBeInTheDocument();
   });
+
+  it('5. Verifica se o botão de login é enabled após preencher campos de email e senha corretamente: ', async () => {
+    const emailInput = screen.getByTestId(EMAIL);
+    const passwordInput = screen.getByTestId(PASS);
+    const button = screen.getByRole('button');
+
+    expect(button).toBeDisabled();
+
+    await userEvent.type(emailInput, 'rafael@rafael.com');
+    await userEvent.type(passwordInput, '123123');
+
+    expect(button).not.toBeDisabled();
+  });
 });
