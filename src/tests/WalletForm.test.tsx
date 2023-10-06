@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import WalletForm from '../components/WalletForm/WalletForm';
+import { fetchCurrencies } from '../services/api';
 
 describe('Testes Wallet Form component', () => {
   beforeEach(() => {
@@ -20,5 +21,17 @@ describe('Testes Wallet Form component', () => {
   it('2. Verifica se o botão Adicionar despesa está funcionando.', () => {
     const submitButton = screen.getByRole('button');
     userEvent.click(submitButton);
+  });
+
+  it('3. Verifica se o formulário permite selecionar a moeda', async () => {
+    const currencyInput = screen.getByTestId('currency-input');
+    userEvent.click(currencyInput);
+
+    await fetchCurrencies();
+
+    const optionToSelect = screen.getByText('USD');
+    userEvent.click(optionToSelect);
+
+    expect(currencyInput).toHaveValue('USD');
   });
 });
