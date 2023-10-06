@@ -1,13 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { RootStateType, DispatchType } from '../../types';
-import { actionAddExpenses, actionFetchApi } from '../../redux/actions';
+import { RootStateType, DispatchType, WalletFormType } from '../../types';
+import {
+  actionAddExpense,
+  actionUpdateExpense,
+  actionFetchApi,
+} from '../../redux/actions';
 import { fetchCurrencies } from '../../services/api';
 
 function WalletForm() {
   const dispatch: DispatchType = useDispatch();
-  const { currencies } = useSelector((state: RootStateType) => state.wallet);
-  const [formData, setFormData] = useState({
+  const {
+    currencies,
+    expenses,
+    expenseId,
+    expenseUpdate,
+  } = useSelector((state: RootStateType) => state.wallet);
+  const [formData, setFormData] = useState<WalletFormType>({
     id: 0,
     value: '',
     description: '',
@@ -23,14 +32,15 @@ function WalletForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleAddExpense = async (e:
+  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     // Requisição para API
     const rate = await fetchCurrencies();
     // Salva Dados no estado global junto com a Cotação da moeda
     const Expense = { ...formData, exchangeRates: rate };
-    // Dispara action para salvar os dados
-    dispatch(actionAddExpenses(Expense));
+    // Dipara action para adicionar ao estado global
+    dispatch(actionAddExpense(Expense));
     // Reseta o formulário
     setFormData({
       id: Expense.id + 1,
@@ -41,14 +51,40 @@ function WalletForm() {
       tag: 'Alimentação',
     });
   };
-  // Busca moedas da API
+
+  const handleUpdateExpense = async (e:
+  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    // Requisição para API
+    const rate = await fetchCurrencies();
+    // Atualiza os dados
+    const updatedExpense = { ...formData, exchangeRates: rate };
+    // Dispara action para atualizar os dados no estado global
+    dispatch(actionUpdateExpense(updatedExpense, expenseId));
+    // Reseta o form
+    setFormData({ ...formData, value: '', description: '' });
+  };
+
+  // Atualiza os dados da tabela em caso de Edição de dados
+  useEffect(() => {
+    // Verifica se o Id salvo no estado global é igual ao Id da despesa
+    const expenseObj = expenses.find((expense) => expense.id === expenseId);
+    if (expenseObj) {
+      // Desestrura os dados do objeto expense
+      const { id, value, description, currency, method, tag } = expenseObj;
+      // Carrega dados no form
+      setFormData({ id, value, description, currency, method, tag });
+    }
+  }, [expenseId, expenseUpdate, expenses]);
+
+  // Busca moedas da API com thunk
   useEffect(() => {
     dispatch(actionFetchApi());
   }, [dispatch]);
 
   return (
     <div>
-      <form onSubmit={ handleSubmit }>
+      <form>
         <label>
           Value:
           <input
@@ -120,7 +156,12 @@ function WalletForm() {
             <option>Saúde</option>
           </select>
         </label>
-        <button type="submit">Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ expenseUpdate ? handleUpdateExpense : handleAddExpense }
+        >
+          {expenseUpdate ? 'Editar despesa' : 'Adicionar despesa'}
+        </button>
       </form>
     </div>
   );
