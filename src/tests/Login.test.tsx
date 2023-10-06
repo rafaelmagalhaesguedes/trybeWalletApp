@@ -66,4 +66,29 @@ describe('Testes Login Page', () => {
 
     expect(button).not.toBeDisabled();
   });
+
+  it('6. Verifica se ao clicar no botão Entrar é redirecionado para /carteira', async () => {
+    const button = screen.getByRole('button', { name: 'Entrar' });
+    const emailInput = screen.getByTestId(/email-input/i);
+    const passwordInput = screen.getByTestId(/password-input/i);
+    const emailTest = 'user@email.com';
+    const passTest = '123456';
+
+    expect(button).toBeDisabled();
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+
+    await userEvent.type(emailInput, emailTest);
+    await userEvent.type(passwordInput, passTest);
+
+    expect(button).toBeEnabled();
+    expect(emailInput).toHaveValue(emailTest);
+    expect(passwordInput).toHaveValue(passTest);
+
+    await userEvent.click(button);
+
+    expect(button).not.toBeInTheDocument();
+    expect(emailInput).not.toBeInTheDocument();
+    expect(passwordInput).not.toBeInTheDocument();
+  });
 });
