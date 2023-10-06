@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootStateType } from '../../types';
-import { actionDeleteExpenses } from '../../redux/actions';
+import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
 
 function Table() {
   const dispatch: DispatchType = useDispatch();
@@ -8,7 +8,12 @@ function Table() {
 
   // Delete Expense
   const handleDeleteExpense = (id: number) => {
-    dispatch(actionDeleteExpenses(id));
+    dispatch(actionDeleteExpense(id));
+  };
+
+  // Edit Expense
+  const handleEditExpense = (id: number) => {
+    dispatch(actionEditExpense(id));
   };
 
   return (
@@ -41,7 +46,12 @@ function Table() {
             </td>
             <td>Real</td>
             <td>
-              <button>Editar</button>
+              <button
+                data-testid="edit-btn"
+                onClick={ () => handleEditExpense(expense.id) }
+              >
+                Editar
+              </button>
               <button
                 data-testid="delete-btn"
                 onClick={ () => handleDeleteExpense(expense.id) }
