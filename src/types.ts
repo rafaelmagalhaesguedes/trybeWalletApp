@@ -5,6 +5,15 @@ export type LoginType = {
   email: string,
 };
 
+export type WalletFormType = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+};
+
 export type ExpensesType = {
   id: number,
   value: string,
@@ -24,11 +33,13 @@ export type ExpensesType = {
 export type WalletType = {
   expenses: ExpensesType[],
   currencies: [],
+  expenseId: any,
+  expenseUpdate: boolean,
 };
 
 export type ActionType = {
   type: string,
-  payload: string | number,
+  payload: any,
 };
 
 export type RootStateType = {
