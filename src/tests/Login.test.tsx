@@ -21,4 +21,10 @@ describe('Testes Login Page', () => {
     expect(passwordInput).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
+
+  it('2. Verifica se o botão está desabilitado inicialmente: ', () => {
+    const button = screen.getByRole('button');
+
+    expect(button).toBeDisabled();
+  });
 });
