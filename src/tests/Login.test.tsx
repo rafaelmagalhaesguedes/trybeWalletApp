@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
@@ -26,5 +27,24 @@ describe('Testes Login Page', () => {
     const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
+  });
+
+  it('3. Verifica se o formulário funciona corretamente: ', async () => {
+    const user = userEvent.setup();
+
+    const emailInput = screen.getByTestId(EMAIL);
+    const passwordInput = screen.getByTestId(PASS);
+    const button = screen.getByRole('button');
+
+    await user.type(emailInput, 'trybe@trybe.com');
+    await user.type(passwordInput, '123123');
+    await user.click(button);
+
+    const emailField = screen.getByTestId('email-field');
+    const totalField = screen.getByTestId('total-field');
+    const currencyField = screen.getByTestId('header-currency-field');
+    expect(emailField).toBeInTheDocument();
+    expect(totalField).toBeInTheDocument();
+    expect(currencyField).toBeInTheDocument();
   });
 });
