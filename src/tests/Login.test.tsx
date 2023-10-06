@@ -47,4 +47,10 @@ describe('Testes Login Page', () => {
     expect(totalField).toBeInTheDocument();
     expect(currencyField).toBeInTheDocument();
   });
+
+  test('4. Verifica se ao acessar diretamente a rota /carteira, o formulário não é renderizado: ', () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+    expect(screen.queryByText('Value: ')).not.toBeInTheDocument();
+    expect(screen.queryByText('Description: ')).not.toBeInTheDocument();
+  });
 });
