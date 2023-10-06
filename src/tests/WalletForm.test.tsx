@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import WalletForm from '../components/WalletForm/WalletForm';
 
@@ -14,5 +15,10 @@ describe('Testes Wallet Form component', () => {
     expect(screen.getByTestId('method-input')).toBeInTheDocument();
     expect(screen.getByTestId('tag-input')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('2. Verifica se o botão Adicionar despesa está funcionando.', () => {
+    const submitButton = screen.getByRole('button');
+    userEvent.click(submitButton);
   });
 });
