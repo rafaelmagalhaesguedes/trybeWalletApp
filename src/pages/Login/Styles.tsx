@@ -45,7 +45,7 @@ export const Img = styled.img`
 `;
 
 export const Input = styled.input`
-  width: 330px;
+  width: 20rem;
   height: 40px;
   border-radius: 5px;
   border: 1px solid #003BE5;
@@ -62,7 +62,7 @@ export const Input = styled.input`
 `;
 
 export const LoginButton = styled.button`
-  width: 330px;
+  width: 20rem;
   height: 40px;
   border-radius: 5px;
   border: 1px solid #003BE5;
@@ -70,4 +70,11 @@ export const LoginButton = styled.button`
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
+
+  &:disabled {
+    background-color: rgba(0, 59, 229, 0.7);
+    border: none;
+    cursor: not-allowed;
+
+  }
 `;
