@@ -2,9 +2,20 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { actionAddUser } from '../../redux/actions';
+import { DispatchType } from '../../types';
+import img_logo from '../../images/logo_trybe_wallet.png';
+import {
+  LoginContainer,
+  LoginWrapper,
+  LoginForm,
+  Logo,
+  Img,
+  Input,
+  LoginButton,
+} from './Styles';
 
 function Login() {
-  const dispatch = useDispatch();
+  const dispatch: DispatchType = useDispatch();
   const navigate = useNavigate();
   const [formValid, setFormValid] = useState<boolean>(false);
   const [formData, setFormData] = useState({
@@ -33,33 +44,37 @@ function Login() {
   }, [formData.email, formData.password]);
 
   return (
-    <section className="login-container">
-      <div className="login-wrapper">
-        <div className="login-logo">Logo</div>
-        <form onSubmit={ handleSubmit }>
-          <input
+    <LoginContainer>
+      <LoginWrapper>
+        <LoginForm onSubmit={ handleSubmit }>
+          <Logo>
+            <Img src={ img_logo } alt="Logo" />
+          </Logo>
+          <Input
             data-testid="email-input"
             type="text"
             name="email"
             value={ formData.email }
             onChange={ handleChange }
+            placeholder="E-mail"
           />
-          <input
+          <Input
             data-testid="password-input"
             type="password"
             name="password"
             value={ formData.password }
             onChange={ handleChange }
+            placeholder="Senha"
           />
-          <button
+          <LoginButton
             type="submit"
             disabled={ formValid }
           >
             Entrar
-          </button>
-        </form>
-      </div>
-    </section>
+          </LoginButton>
+        </LoginForm>
+      </LoginWrapper>
+    </LoginContainer>
   );
 }
 
