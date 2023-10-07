@@ -78,7 +78,7 @@ function WalletForm() {
     }
   }, [expenseId, expenseUpdate, expenses]);
 
-  // Busca moedas da API com thunk
+  // Busca moedas da API com thunk'
   useEffect(() => {
     dispatch(actionFetchApi());
   }, [dispatch]);
