@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootStateType } from '../../types';
 import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
+import { TableContainer } from './Styles';
 
 function Table() {
   const dispatch: DispatchType = useDispatch();
@@ -17,7 +18,7 @@ function Table() {
   };
 
   return (
-    <table>
+    <TableContainer>
       <thead>
         <tr>
           <th>Descrição</th>
@@ -62,7 +63,7 @@ function Table() {
           </tr>
         ))}
       </tbody>
-    </table>
+    </TableContainer>
   );
 }
 
