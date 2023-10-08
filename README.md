@@ -6,6 +6,8 @@ Este projeto é uma carteira de controle de gastos com um conversor de moedas. A
 
 O projeto demonstra a capacidade de criar um _store_ Redux em aplicações React, criar _reducers_, _actions_ e _dispatchers_ no Redux, usar hooks do Redux para manipulação e leitura do estado global e criar _actions_ assíncronas na aplicação React que fazem uso do Redux.
 
+Link da aplicação no ar: https://trybe-wallet-app.vercel.app/
+
 ## Capturas de Tela
 
 ## Tela Login
