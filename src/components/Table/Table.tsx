@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootStateType } from '../../types';
 import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
-import { TableContainer } from './Styles';
+import { TableBody, TableContainer, TableHeader } from './Styles';
 
 function Table() {
   const dispatch: DispatchType = useDispatch();
@@ -19,7 +19,7 @@ function Table() {
 
   return (
     <TableContainer>
-      <thead>
+      <TableHeader>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -29,10 +29,10 @@ function Table() {
           <th>Câmbio utilizado</th>
           <th>Valor convertido</th>
           <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
+          <th className="th_edit">Editar/Excluir</th>
         </tr>
-      </thead>
-      <tbody>
+      </TableHeader>
+      <TableBody>
         {expenses.map((expense) => (
           <tr key={ expense.id }>
             <td>{ expense.description }</td>
@@ -62,7 +62,7 @@ function Table() {
             </td>
           </tr>
         ))}
-      </tbody>
+      </TableBody>
     </TableContainer>
   );
 }
