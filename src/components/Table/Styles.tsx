@@ -31,21 +31,19 @@ export const TableBody = styled.tbody`
   }
 
   td {
-    font-size: 12px;
-    color: white;
+    color: #2FC18C;
     width: 112px;
     text-align: center;
     padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 13px;
   }
 
-  ::-webkit-scrollbar-track {
-    background-color: #F4F4F4;
-  }
-  ::-webkit-scrollbar {
-      width: 6px;
-      background: #F4F4F4;
-  }
-  ::-webkit-scrollbar-thumb {
-      background: #dad7d7;
+  button {
+    border: none;
+    cursor: pointer;
+    background: #003BE5;
+    padding: 0 10px;
   }
 `;

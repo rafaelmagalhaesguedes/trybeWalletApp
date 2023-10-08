@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootStateType } from '../../types';
 import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
 import { TableBody, TableContainer, TableHeader } from './Styles';
+import iconEdit from '../../images/iconEdit.png';
+import iconDelet from '../../images/iconDelet.png';
 
 function Table() {
   const dispatch: DispatchType = useDispatch();
@@ -51,13 +53,13 @@ function Table() {
                 data-testid="edit-btn"
                 onClick={ () => handleEditExpense(expense.id) }
               >
-                Editar
+                <img src={ iconEdit } alt="Edit expense" title="Editar" />
               </button>
               <button
                 data-testid="delete-btn"
                 onClick={ () => handleDeleteExpense(expense.id) }
               >
-                Excluir
+                <img src={ iconDelet } alt="Delet expense" title="Excluir" />
               </button>
             </td>
           </tr>
