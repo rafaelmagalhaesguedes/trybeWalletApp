@@ -33,6 +33,14 @@ export const LoginForm = styled.form`
   flex-direction: column;
   padding: 57px 98px;
   gap: 10px;
+
+  @media only screen and ( max-width: 530px ) {
+    width: 90%;
+  }
+
+  @media only screen and ( max-width: 768px ) {
+    width: 90%;
+  }
 `;
 
 export const Logo = styled.div`
@@ -42,6 +50,10 @@ export const Logo = styled.div`
 export const Img = styled.img`
   Width: 268px;
   Height: 56px;
+
+  @media only screen and ( max-width: 375px ) {
+    width: 200px;
+  }
 `;
 
 export const Input = styled.input`
@@ -59,6 +71,14 @@ export const Input = styled.input`
     border: 1px solid darkblue;
     outline: 0;
   }
+
+  @media only screen and ( max-width: 375px ) {
+    width: 15rem;
+  }
+
+  @media only screen and ( max-width: 285px ) {
+    width: 10rem;
+  }
 `;
 
 export const LoginButton = styled.button`
@@ -75,6 +95,13 @@ export const LoginButton = styled.button`
     background-color: rgba(0, 59, 229, 0.7);
     border: none;
     cursor: not-allowed;
+  }
 
+  @media only screen and ( max-width: 375px ) {
+    width: 15rem;
+  }
+
+  @media only screen and ( max-width: 285px ) {
+    width: 10rem;
   }
 `;
