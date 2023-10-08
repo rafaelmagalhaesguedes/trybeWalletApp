@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
 
 export const SectionHeader = styled.section`
   width: 80%;
-  height: 370px;
+  height: 320px;
   background: white;
   position: absolute;
   border-radius: 0 0 10px 10px;
@@ -32,8 +32,12 @@ export const SectionHeader = styled.section`
 
 export const SectionTable = styled.section`
   width: 90%;
-  height: 400px;
+  heigth: auto;
+  padding-bottom: 10px;
   background: #003BE5;
-  margin-top: 140px;
+  margin-top: 96px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
 `;
