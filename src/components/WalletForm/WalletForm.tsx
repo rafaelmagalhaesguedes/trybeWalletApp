@@ -1,13 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { fetchCurrencies } from '../../services/api';
 import { RootStateType, DispatchType, WalletFormType } from '../../types';
 import {
   actionAddExpense,
   actionUpdateExpense,
   actionFetchApi,
 } from '../../redux/actions';
-import { fetchCurrencies } from '../../services/api';
-import { Form, FormContainer, InputDesc, Label, Select } from './Styles';
+import {
+  ButtonForm,
+  Form,
+  FormContainer,
+  InputDesc,
+  InputValue,
+  Label,
+  Select,
+} from './Styles';
 
 function WalletForm() {
   const dispatch: DispatchType = useDispatch();
@@ -78,7 +86,7 @@ function WalletForm() {
     }
   }, [expenseId, expenseUpdate, expenses]);
 
-  // Busca moedas da API com thunk'
+  // Busca moedas da API com thunk
   useEffect(() => {
     dispatch(actionFetchApi());
   }, [dispatch]);
@@ -87,7 +95,7 @@ function WalletForm() {
     <FormContainer>
       <Form>
         <Label htmlFor="description">
-          Descrição da despesa:
+          Descrição da despesa
           {' '}
           <InputDesc
             type="text"
@@ -99,7 +107,7 @@ function WalletForm() {
         </Label>
 
         <Label>
-          Categoria da despesa:
+          Categoria da despesa
           {' '}
           <Select
             data-testid="tag-input"
@@ -115,20 +123,22 @@ function WalletForm() {
           </Select>
         </Label>
 
-        <label>
-          Valor:
-          <input
+        <Label>
+          Valor
+          {' '}
+          <InputValue
             type="number"
             name="value"
             data-testid="value-input"
             value={ formData.value }
             onChange={ handleChange }
           />
-        </label>
+        </Label>
 
-        <label>
-          Método de pagamento:
-          <select
+        <Label>
+          Método de pagamento
+          {' '}
+          <Select
             data-testid="method-input"
             name="method"
             value={ formData.method }
@@ -137,12 +147,13 @@ function WalletForm() {
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
             <option>Cartão de débito</option>
-          </select>
-        </label>
+          </Select>
+        </Label>
 
-        <label>
-          Moeda:
-          <select
+        <Label>
+          Moeda
+          {' '}
+          <Select
             data-testid="currency-input"
             name="currency"
             value={ formData.currency }
@@ -157,14 +168,15 @@ function WalletForm() {
               );
             })
             }
-          </select>
-        </label>
-        <button
+          </Select>
+        </Label>
+        <ButtonForm
+          className="btn"
           type="button"
           onClick={ expenseUpdate ? handleUpdateExpense : handleAddExpense }
         >
           {expenseUpdate ? 'Editar despesa' : 'Adicionar despesa'}
-        </button>
+        </ButtonForm>
       </Form>
     </FormContainer>
   );

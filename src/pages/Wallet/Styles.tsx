@@ -22,17 +22,18 @@ export const Wrapper = styled.div`
 `;
 
 export const SectionHeader = styled.section`
-  width: 70%;
-  height: 350px;
+  width: 80%;
+  height: 370px;
   background: white;
   position: absolute;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: -4px 9px 13px 0px #05123666;
 `;
 
 export const SectionTable = styled.section`
-  width: 80%;
+  width: 90%;
   height: 400px;
   background: #003BE5;
-  margin-top: 156px;
+  margin-top: 140px;
   border-radius: 10px;
 `;
