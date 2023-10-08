@@ -37,7 +37,7 @@ Link da aplicação no ar: https://trybe-wallet-app.vercel.app/
 
 # Principais tecnologias utilizadas
 
-- JavaScrit
+- JavaScript
 - TypeScript
 - ReactJS
 - Redux
