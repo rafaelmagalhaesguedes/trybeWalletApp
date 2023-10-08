@@ -1,4 +1,4 @@
-# Controle de Gastos com Conversor de Moedas
+# Controle de Gastos com Conversor de Moedas 💰
 
 ## Visão Geral
 
@@ -30,7 +30,16 @@ O projeto demonstra a capacidade de criar um _store_ Redux em aplicações React
 - Criação de dispatchers no Redux em aplicações React.
 - Uso dos hooks do Redux para manipulação e leitura do estado global.
 - Criação de actions assíncronas na aplicação React que fazem uso do Redux.
+- Uso do Styled Components para estilização.
+- Uso do React Testing Library para criação de testes.
 
+# Principais tecnologias utilizadas
+
+- ReactJS
+- TypeScript
+- Redux
+- Styled Components
+- React Testing Library
 
 # Author
 
