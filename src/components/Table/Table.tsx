@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootStateType } from '../../types';
 import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
-import { TableContainer } from './Styles';
+import { TableBody, TableContainer, TableHeader } from './Styles';
+import iconEdit from '../../images/iconEdit.png';
+import iconDelet from '../../images/iconDelet.png';
 
 function Table() {
   const dispatch: DispatchType = useDispatch();
@@ -19,7 +21,7 @@ function Table() {
 
   return (
     <TableContainer>
-      <thead>
+      <TableHeader>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -29,10 +31,10 @@ function Table() {
           <th>Câmbio utilizado</th>
           <th>Valor convertido</th>
           <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
+          <th className="th_edit">Editar/Excluir</th>
         </tr>
-      </thead>
-      <tbody>
+      </TableHeader>
+      <TableBody>
         {expenses.map((expense) => (
           <tr key={ expense.id }>
             <td>{ expense.description }</td>
@@ -51,18 +53,18 @@ function Table() {
                 data-testid="edit-btn"
                 onClick={ () => handleEditExpense(expense.id) }
               >
-                Editar
+                <img src={ iconEdit } alt="Edit expense" title="Editar" />
               </button>
               <button
                 data-testid="delete-btn"
                 onClick={ () => handleDeleteExpense(expense.id) }
               >
-                Excluir
+                <img src={ iconDelet } alt="Delet expense" title="Excluir" />
               </button>
             </td>
           </tr>
         ))}
-      </tbody>
+      </TableBody>
     </TableContainer>
   );
 }
