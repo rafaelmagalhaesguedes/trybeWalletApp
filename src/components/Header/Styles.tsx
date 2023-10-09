@@ -6,6 +6,13 @@ export const HeaderContainer = styled.header`
   padding: 25px 100px;
   justify-content: space-between;
   align-items: center;
+
+  @media only screen and ( max-width: 768px ) {
+    padding: 20px;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+  }
 `;
 
 export const HeaderLogo = styled.div`
