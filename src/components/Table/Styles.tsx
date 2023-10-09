@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.table`
-  padding-top: 250px;
+  padding-top: 240px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 500px;
 
   @media only screen and ( max-width: 768px ) {
     padding: 0;
     margin: 0;
     overflow-x: auto;
     display: block;
+    height: auto;
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1138px) {
@@ -28,6 +31,7 @@ export const TableHeader = styled.thead`
     border-right: 1px solid white;
     border-bottom: 1px solid white;
     width: 112px;
+    padding: 10px;
   }
 
   .th_edit {
@@ -43,11 +47,7 @@ export const TableHeader = styled.thead`
 
 export const TableBody = styled.tbody`
   padding: 10px;
-  height: 200px;
-
-  .tr_body {
-    border-bottom: 1px solid white;
-  }
+  height: auto;
 
   td {
     color: white;
