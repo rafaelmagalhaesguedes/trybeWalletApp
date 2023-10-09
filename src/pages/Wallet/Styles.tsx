@@ -28,6 +28,12 @@ export const SectionHeader = styled.section`
   position: absolute;
   border-radius: 0 0 10px 10px;
   box-shadow: -4px 9px 13px 0px #05123666;
+
+  @media only screen and ( max-width: 768px ) {
+    height: auto;
+    width: 100%;
+    position: relative;
+  }
 `;
 
 export const SectionTable = styled.section`
@@ -39,5 +45,11 @@ export const SectionTable = styled.section`
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  overflow: auto;
+
+  @media only screen and ( max-width: 768px ) {
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 `;
