@@ -11,6 +11,12 @@ export const TableContainer = styled.table`
     overflow-x: auto;
     display: block;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    padding: 0;
+    margin: 0;
+    height: auto;
+  }
 `;
 
 export const TableHeader = styled.thead`
@@ -70,5 +76,12 @@ export const TableBody = styled.tbody`
       border-right: 1px solid white;
       border-bottom: 1px solid white;
     }
+  }
+
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    padding: 0;
+    margin: 0;
+    height: auto;
   }
 `;

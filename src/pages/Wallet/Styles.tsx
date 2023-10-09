@@ -34,6 +34,11 @@ export const SectionHeader = styled.section`
     width: 100%;
     position: relative;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    height: auto;
+    position: relative;
+  }
 `;
 
 export const SectionTable = styled.section`
@@ -51,5 +56,13 @@ export const SectionTable = styled.section`
     width: 100%;
     margin: 0;
     padding: 0;
+    border-radius: 0;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0;
   }
 `;
