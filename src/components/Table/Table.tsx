@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { DispatchType, RootStateType } from '../../types';
 import { actionDeleteExpense, actionEditExpense } from '../../redux/actions';
 import { TableBody, TableContainer, TableHeader } from './Styles';
@@ -12,6 +13,13 @@ function Table() {
   // Delete Expense
   const handleDeleteExpense = (id: number) => {
     dispatch(actionDeleteExpense(id));
+    // Show SweetAlert2 alert
+    Swal.fire({
+      text: 'Despesa deletada com sucesso!',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+    });
   };
 
   // Edit Expense
