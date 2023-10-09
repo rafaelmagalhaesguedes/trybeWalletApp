@@ -13,6 +13,9 @@ export const HeaderContainer = styled.header`
     justify-content: center;
     gap: 10px;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+  }
 `;
 
 export const HeaderLogo = styled.div`

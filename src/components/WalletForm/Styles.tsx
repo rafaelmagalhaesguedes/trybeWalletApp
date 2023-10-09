@@ -11,6 +11,12 @@ export const FormContainer = styled.div`
     height: auto;
     width: 100%;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -20,6 +26,11 @@ export const Form = styled.form`
   gap: 5px;
 
   @media only screen and ( max-width: 768px ) {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
     flex-direction: column;
     width: 100%;
   }
@@ -45,6 +56,10 @@ export const InputDesc = styled.input`
   @media only screen and ( max-width: 768px ) {
     width: 100%;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    width: 100%;
+  }
 `;
 
 export const Select = styled.select`
@@ -64,6 +79,10 @@ export const Select = styled.select`
   @media only screen and ( max-width: 768px ) {
     width: 100%;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+    width: 100%;
+  }
 `;
 
 export const InputValue = styled.input`
@@ -79,6 +98,10 @@ export const InputValue = styled.input`
   }
 
   @media only screen and ( max-width: 768px ) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
     width: 100%;
   }
 `;
@@ -104,6 +127,10 @@ background: #2FC18C;
 
   @media only screen and ( max-width: 768px ) {
     margin-top: 15px;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1138px) {
     width: 100%;
   }
 `;
