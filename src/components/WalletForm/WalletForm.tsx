@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import { fetchCurrencies } from '../../services/api';
 import { RootStateType, DispatchType, WalletFormType } from '../../types';
 import {
@@ -19,6 +20,8 @@ import {
 
 function WalletForm() {
   const dispatch: DispatchType = useDispatch();
+  const [disabled, setDisabled] = useState(false);
+  const TAG = 'Alimentação';
   const {
     currencies,
     expenses,
@@ -31,7 +34,7 @@ function WalletForm() {
     description: '',
     currency: 'USD',
     method: 'Dinheiro',
-    tag: 'Alimentação',
+    tag: TAG,
   });
 
   const handleChange = (
@@ -57,7 +60,14 @@ function WalletForm() {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: TAG,
+    });
+    // Show SweetAlert2 alert
+    Swal.fire({
+      text: 'Despesa cadastrada com sucesso',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
     });
   };
 
@@ -71,7 +81,21 @@ function WalletForm() {
     // Dispara action para atualizar os dados no estado global
     dispatch(actionUpdateExpense(updatedExpense, expenseId));
     // Reseta o form
-    setFormData({ ...formData, value: '', description: '' });
+    setFormData({
+      ...formData,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: TAG,
+    });
+    // Show SweetAlert2 alert
+    Swal.fire({
+      text: 'Despesa editada com sucesso!',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+    });
   };
 
   // Atualiza os dados da tabela em caso de Edição de dados
@@ -85,6 +109,18 @@ function WalletForm() {
       setFormData({ id, value, description, currency, method, tag });
     }
   }, [expenseId, expenseUpdate, expenses]);
+
+  // Configura button disabled/enabled
+  useEffect(() => {
+    const handleDisabledButton = () => {
+      if (formData.description.length && formData.value.length) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    };
+    handleDisabledButton();
+  }, [formData.description, formData.value]);
 
   // Busca moedas da API com thunk
   useEffect(() => {
@@ -173,6 +209,7 @@ function WalletForm() {
         <ButtonForm
           className="btn"
           type="button"
+          disabled={ disabled }
           onClick={ expenseUpdate ? handleUpdateExpense : handleAddExpense }
         >
           {expenseUpdate ? 'Editar despesa' : 'Adicionar despesa'}
