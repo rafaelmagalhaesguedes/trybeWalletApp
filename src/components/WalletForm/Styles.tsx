@@ -5,6 +5,11 @@ export const FormContainer = styled.div`
   padding: 20px;
   height: 145px;
   background: #E1E5EB7D;
+
+  @media only screen and ( max-width: 768px ) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 export const Form = styled.form`
@@ -12,6 +17,10 @@ export const Form = styled.form`
   flex-flow: row wrap;
   justify-content: center;
   gap: 5px;
+
+  @media only screen and ( max-width: 768px ) {
+    flex-direction: column;
+  }
 `;
 
 export const Label = styled.label`
@@ -30,6 +39,10 @@ export const InputDesc = styled.input`
     border: 2px solid blue;
     outline: 0;
   }
+
+  @media only screen and ( max-width: 768px ) {
+    width: 100%;
+  }
 `;
 
 export const Select = styled.select`
@@ -45,6 +58,10 @@ export const Select = styled.select`
     border: 2px solid blue;
     outline: 0;
   }
+
+  @media only screen and ( max-width: 768px ) {
+    width: 100%;
+  }
 `;
 
 export const InputValue = styled.input`
@@ -57,6 +74,10 @@ export const InputValue = styled.input`
   &:focus {
     border: 2px solid blue;
     outline: 0;
+  }
+
+  @media only screen and ( max-width: 768px ) {
+    width: 100%;
   }
 `;
 
@@ -77,5 +98,9 @@ background: #2FC18C;
 
   &:hover {
     background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 90%);
+  }
+
+  @media only screen and ( max-width: 768px ) {
+    margin-top: 15px;
   }
 `;
