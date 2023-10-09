@@ -41,7 +41,7 @@ function Table() {
             <td>{ expense.tag }</td>
             <td>{ expense.method}</td>
             <td>{parseFloat(expense.value).toFixed(2)}</td>
-            <td>{`${expense.exchangeRates[expense.currency].name}`}</td>
+            <td>{ expense.currency }</td>
             <td>{parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
             <td>
               {(parseFloat(expense.value)
