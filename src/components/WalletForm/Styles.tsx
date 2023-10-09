@@ -9,6 +9,7 @@ export const FormContainer = styled.div`
   @media only screen and ( max-width: 768px ) {
     flex-direction: column;
     height: auto;
+    width: 100%;
   }
 `;
 
@@ -20,6 +21,7 @@ export const Form = styled.form`
 
   @media only screen and ( max-width: 768px ) {
     flex-direction: column;
+    width: 100%;
   }
 `;
 
