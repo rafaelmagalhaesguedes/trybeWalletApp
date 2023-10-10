@@ -20,7 +20,7 @@ Link da aplicação no ar: https://trybe-wallet-app.vercel.app/
 
 ## Tela Inicial Funcionamento
 
-![Tela Inicial](imgs/tela_com_dados.png)
+![Tela Inicial](imgs/resposive_redux.png)
 
 # Habilidades Demonstradas
 
