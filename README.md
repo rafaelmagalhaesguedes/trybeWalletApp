@@ -18,7 +18,7 @@ O projeto demonstra a capacidade de criar um _store_ Redux em aplicações React
 
 ## Tela Inicial Funcionamento
 
-![Tela Inicial](imgs/tela_com_dados.png)
+![Tela Inicial](imgs/resposive_redux.png)
 
 # Habilidades Demonstradas
 
