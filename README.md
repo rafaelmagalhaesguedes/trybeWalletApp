@@ -20,7 +20,13 @@ Link da aplicação no ar: https://trybe-wallet-app.vercel.app/
 
 ## Tela Inicial Funcionamento
 
+![Tela Inicial](imgs/tela_2.png)
+
+![Tela Inicial](imgs/tela_3.png)
+
 ![Tela Inicial](imgs/resposive_redux.png)
+
+![Tela Inicial](imgs/responsive_redux_2.png)
 
 # Habilidades Demonstradas
 
@@ -47,7 +53,3 @@ Link da aplicação no ar: https://trybe-wallet-app.vercel.app/
 # Author
 
 Rafael Magalhães Guedes
-
-# Licença
-
-Livre
