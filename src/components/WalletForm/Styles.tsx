@@ -133,4 +133,8 @@ background: #2FC18C;
   @media only screen and (min-width: 768px) and (max-width: 1138px) {
     width: 100%;
   }
+
+  @media only screen and (min-width: 1518px) {
+    margin: 5px 10px;
+  }
 `;
