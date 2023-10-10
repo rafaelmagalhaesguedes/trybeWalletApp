@@ -9,12 +9,15 @@ export const HeaderContainer = styled.header`
 
   @media only screen and ( max-width: 768px ) {
     padding: 20px;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     justify-content: center;
     gap: 10px;
   }
 
-  @media only screen and (min-width: 768px) and (max-width: 1138px) {
+  @media only screen and (min-width: 768px) and (max-width: 1138px) { 
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 10px;
   }
 `;
 
