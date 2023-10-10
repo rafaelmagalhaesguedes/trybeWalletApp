@@ -18,7 +18,13 @@ O projeto demonstra a capacidade de criar um _store_ Redux em aplicações React
 
 ## Tela Inicial Funcionamento
 
+![Tela Inicial](imgs/tela_2.png)
+
+![Tela Inicial](imgs/tela_3.png)
+
 ![Tela Inicial](imgs/resposive_redux.png)
+
+![Tela Inicial](imgs/responsive_redux_2.png)
 
 # Habilidades Demonstradas
 
@@ -35,7 +41,3 @@ O projeto demonstra a capacidade de criar um _store_ Redux em aplicações React
 # Author
 
 Rafael Magalhães Guedes
-
-# Licença
-
-Livre
