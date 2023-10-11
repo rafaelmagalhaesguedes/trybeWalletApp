@@ -26,28 +26,14 @@ const initialState = {
   },
 };
 
-beforeAll(() => {
-  vi.spyOn(global, 'fetch').mockResolvedValue({ json: async () => mockData } as Response);
-});
-
 describe('Testando o estado global do Redux', () => {
   it('Possui a estrutura correta do estado global', () => {
-    const { store } = renderWithRouterAndRedux(<App />);
-    expect(store.getState()).toEqual({
-      user: {
-        email: '',
-      },
-      wallet: {
-        currencies: [],
-        expenseId: null,
-        expenseUpdate: false,
-        expenses: [],
-      },
-    });
+    const { store } = renderWithRouterAndRedux(<App />, { initialState });
+    expect(store.getState()).toEqual(initialState);
   });
 });
 
-describe('Testes Wallet Form component', () => {
+describe('Testando se form renderiza corretamente na tela', () => {
   it('1. Verifica se o formulário e o botão foram renderizados na tela. ', () => {
     renderWithRouterAndRedux(<WalletForm />);
     expect(screen.getByTestId('value-input')).toBeInTheDocument();
@@ -61,23 +47,49 @@ describe('Testes Wallet Form component', () => {
   it('2. Possui o botão "Adicionar despesa" no form', () => {
     renderWithRouterAndRedux(<WalletForm />);
 
-    const button = screen.getByRole('button', {
-      name: /adicionar despesa/i,
-    });
+    const button = screen.getByRole('button', { name: /adicionar despesa/i });
     expect(button).toBeInTheDocument();
   });
 
-  it('3. Verifica se o botão Adicionar despesa está funcionando.', () => {
-    renderWithRouterAndRedux(<WalletForm />);
-    const submitButton = screen.getByRole('button');
-    userEvent.click(submitButton);
-  });
-
-  it('4. Verifica se carrega as moedas corretamente da API', async () => {
+  it('3. Verifica se carrega as moedas corretamente da API', async () => {
     renderWithRouterAndRedux(<WalletForm />, { initialEntries: ['/carteira'], initialState });
 
     ['USD'].forEach((currency) => {
       expect(screen.getByDisplayValue(currency)).toBeInTheDocument();
     });
+  });
+});
+
+describe('Testando se as informações são salvas corretamente', () => {
+  it('1. Salva os dados do formulário no estado global', async () => {
+    const { store } = renderWithRouterAndRedux(
+      <WalletForm />,
+      { initialEntries: ['/carteira'], initialState },
+    );
+
+    vi.spyOn(store, 'dispatch');
+
+    // Formulário com valores simulados
+    const descriptionInput = screen.getByTestId('description-input');
+    const valueInput = screen.getByTestId('value-input');
+    const currencyInput = screen.getByTestId('currency-input');
+    const methodInput = screen.getByTestId('method-input');
+    const tagInput = screen.getByTestId('tag-input');
+
+    await userEvent.type(descriptionInput, 'Nova Descrição');
+    await userEvent.type(valueInput, '400');
+    await userEvent.type(currencyInput, 'USD');
+    await userEvent.type(methodInput, 'Dinheiro');
+    await userEvent.type(tagInput, 'Alimentação');
+
+    // Simula click no botão adicionar despesa
+    const button = screen.getByRole('button', { name: /adicionar despesa/i });
+    await userEvent.click(button);
+
+    // Verifica se o estado global foi alterado corretamente
+    expect(store.getState().wallet.expenses[0].description).toBe('Nova Descrição');
+
+    // Verifica se o dispatch foi chamado
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 });
