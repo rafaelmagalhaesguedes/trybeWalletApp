@@ -4,6 +4,7 @@ import { vi } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import WalletForm from '../components/WalletForm/WalletForm';
 import mockData from './helpers/mockData';
+import App from '../App';
 
 const initialState = {
   user: {
@@ -27,6 +28,23 @@ const initialState = {
 
 beforeAll(() => {
   vi.spyOn(global, 'fetch').mockResolvedValue({ json: async () => mockData } as Response);
+});
+
+describe('Testando o estado global do Redux', () => {
+  it('Possui a estrutura correta do estado global', () => {
+    const { store } = renderWithRouterAndRedux(<App />);
+    expect(store.getState()).toEqual({
+      user: {
+        email: '',
+      },
+      wallet: {
+        currencies: [],
+        expenseId: null,
+        expenseUpdate: false,
+        expenses: [],
+      },
+    });
+  });
 });
 
 describe('Testes Wallet Form component', () => {
