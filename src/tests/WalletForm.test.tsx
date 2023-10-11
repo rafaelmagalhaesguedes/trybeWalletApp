@@ -40,13 +40,22 @@ describe('Testes Wallet Form component', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  it('2. Verifica se o botão Adicionar despesa está funcionando.', () => {
+  it('2. Possui o botão "Adicionar despesa" no form', () => {
+    renderWithRouterAndRedux(<WalletForm />);
+
+    const button = screen.getByRole('button', {
+      name: /adicionar despesa/i,
+    });
+    expect(button).toBeInTheDocument();
+  });
+
+  it('3. Verifica se o botão Adicionar despesa está funcionando.', () => {
     renderWithRouterAndRedux(<WalletForm />);
     const submitButton = screen.getByRole('button');
     userEvent.click(submitButton);
   });
 
-  it('3. Verifica se carrega as moedas corretamente da API', async () => {
+  it('4. Verifica se carrega as moedas corretamente da API', async () => {
     renderWithRouterAndRedux(<WalletForm />, { initialEntries: ['/carteira'], initialState });
 
     ['USD'].forEach((currency) => {
